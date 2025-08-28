@@ -1,15 +1,15 @@
 "use client";
 import { useState } from "react";
 
-// helper: turn OpenWeather's dt (UTC seconds) + timezone (offset seconds)
+// Convert OpenWeather's dt (UTC seconds) + timezone (offset seconds) to local time string
 function cityLocalTime(dtSeconds, offsetSeconds) {
-  const d = new Date((dtSeconds + offsetSeconds) * 1000);
-  return d.toLocaleString(undefined, { timeZone: "UTC" });
+  const utcMs = (dtSeconds + offsetSeconds) * 1000;
+  return new Date(utcMs).toLocaleString(undefined, { timeZone: "UTC" });
 }
 
-// helper function to convert Celsius to Fahrenheit
+// Celsius → Fahrenheit (1 decimal)
 function cToF(celsius) {
-  return ((celsius * 9) / 5 + 32).toFixed(1); // rounded to 1 decimal
+  return ((celsius * 9) / 5 + 32).toFixed(1);
 }
 
 export default function Home() {
@@ -19,25 +19,31 @@ export default function Home() {
   const [loading, setLoading] = useState(false);
 
   async function getWeather() {
-    if (!city) return;
+    if (!city.trim()) return;
     setLoading(true);
     setError("");
     setWeather(null);
 
     try {
-      const res = await fetch(`/api/weather?city=${encodeURIComponent(city)}`);
+      const res = await fetch(
+        `/api/weather?city=${encodeURIComponent(city.trim())}`
+      );
       const data = await res.json();
 
       if (res.ok) {
         setWeather(data);
       } else {
-        setError(data.error || "Failed to fetch weather");
+        setError(data?.error || "Failed to fetch weather");
       }
     } catch {
       setError("Something went wrong");
     } finally {
       setLoading(false);
     }
+  }
+
+  function onKeyDown(e) {
+    if (e.key === "Enter") getWeather();
   }
 
   return (
@@ -50,6 +56,7 @@ export default function Home() {
           placeholder="Enter city..."
           value={city}
           onChange={(e) => setCity(e.target.value)}
+          onKeyDown={onKeyDown}
         />
         <button onClick={getWeather} disabled={loading}>
           {loading ? "..." : "Search"}
@@ -71,6 +78,7 @@ export default function Home() {
             src={`https://openweathermap.org/img/wn/${weather.icon}@2x.png`}
             alt="weather icon"
           />
+
           <p className="temp">
             {weather.temp}°C / {cToF(weather.temp)}°F
           </p>
@@ -78,21 +86,21 @@ export default function Home() {
 
           <div className="details">
             <div>
-              <span> Humidity</span>
+              <span>Humidity</span>
               <span>{weather.humidity}%</span>
             </div>
             <div>
-              <span> Wind</span>
+              <span>Wind</span>
               <span>{Math.round(weather.wind)} km/h</span>
             </div>
             <div>
-              <span> Visibility</span>
+              <span>Visibility</span>
               <span>{weather.visibility} km</span>
             </div>
           </div>
 
           <div className="feels">
-            <span> Feels like</span>
+            <span>Feels like</span>
             <span>
               {weather.feels_like}°C / {cToF(weather.feels_like)}°F
             </span>
@@ -100,7 +108,6 @@ export default function Home() {
         </div>
       )}
 
-      {/* Footer */}
       <footer className="footer">
         <div className="footer-text">
           <span className="name">Andrew Abu</span>
