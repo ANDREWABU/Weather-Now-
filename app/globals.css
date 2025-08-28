@@ -118,3 +118,31 @@ button {
   font-size: 16px;
   color: #bbb;
 }
+.footer {
+  color: #fff;
+  text-align: center;
+  padding: 15px 0;
+  border-top: 1px solid #333;
+  position: relative;
+  bottom: 0;
+  width: 100%;
+}
+
+.footer-text {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.footer-text .name {
+  font-weight: 600;
+  color: #fff;
+}
+
+.footer-text .copyright {
+  color: #aaa;
+  /* lighter color for copyright */
+}

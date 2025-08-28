@@ -7,7 +7,7 @@ function cityLocalTime(dtSeconds, offsetSeconds) {
   return d.toLocaleString(undefined, { timeZone: "UTC" });
 }
 
-// NEW helper function to convert Celsius to Fahrenheit
+// helper function to convert Celsius to Fahrenheit
 function cToF(celsius) {
   return ((celsius * 9) / 5 + 32).toFixed(1); // rounded to 1 decimal
 }
@@ -65,14 +65,12 @@ export default function Home() {
           </h2>
 
           <p className="today">Today</p>
-          {/* correct local time based on dt + timezone */}
           <p className="time">{cityLocalTime(weather.dt, weather.timezone)}</p>
 
           <img
             src={`https://openweathermap.org/img/wn/${weather.icon}@2x.png`}
             alt="weather icon"
           />
-          {/* CHANGED: show both C° and F° */}
           <p className="temp">
             {weather.temp}°C / {cToF(weather.temp)}°F
           </p>
@@ -93,7 +91,6 @@ export default function Home() {
             </div>
           </div>
 
-          {/* CHANGED: Feels like C° and F° */}
           <div className="feels">
             <span> Feels like</span>
             <span>
@@ -102,6 +99,14 @@ export default function Home() {
           </div>
         </div>
       )}
+
+      {/* Footer */}
+      <footer className="footer">
+        <div className="footer-text">
+          <span className="name">Andrew Abu</span>
+          <span className="copyright">© 2025</span>
+        </div>
+      </footer>
     </div>
   );
 }
