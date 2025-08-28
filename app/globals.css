@@ -1,0 +1,120 @@
+body {
+  font-family: Arial, sans-serif;
+  background: radial-gradient(circle at top, #000000, #200000, #400000);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+}
+
+.container {
+  text-align: center;
+  
+}
+
+.title {
+  font-size: 42px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: #ff3333;
+}
+
+.search {
+  margin-bottom: 20px;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+}
+
+input {
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #444;
+  background: #111;
+  color: white;
+}
+
+button {
+  padding: 10px 14px;
+  margin-left: 10px;
+  border: none;
+  border-radius: 6px;
+  background: #ff3333;
+  color: white;
+  cursor: pointer;
+}
+
+.error {
+  color: #ff8080;
+  margin-top: 10px;
+}
+
+.card {
+  background: #111;
+  border: 1px solid #ff3333;
+  border-radius: 12px;
+  padding: 30px;
+  margin-top: 20px;
+  box-shadow: 0 0 20px rgba(255, 50, 50, 0.5);
+
+  /* 🔑 make it wider */
+  width: 600px;
+  /* fixed width */
+  max-width: 90%;
+  /* shrink on smaller screens */
+  margin-left: auto;
+  margin-right: auto;
+}
+.card:hover {
+  box-shadow: 0 0 35px rgba(255, 0, 0, 0.9);
+  /* brighter red glow */
+  transform: translateY(-5px);
+  /* slight lift */
+  border-color: #ff0000;
+  /* solid red border */
+}
+
+.today {
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+.temp {
+  font-size: 40px;
+  font-weight: bold;
+  margin: 10px 0;
+}
+
+.desc {
+  font-size: 20px;
+  margin-bottom: 20px;
+}
+
+.details {
+  margin-top: 20px;
+  text-align: left;
+}
+
+.details div {
+  display: flex;
+  justify-content: space-between;
+  margin: 6px 0;
+}
+
+.feels {
+  margin-top: 20px;
+  padding: 10px;
+  background: #222;
+  border-radius: 8px;
+  display: flex;
+  justify-content: space-between;
+  font-weight: bold;
+}
+.time {
+  margin: 6px 0 10px;
+  font-size: 16px;
+  color: #bbb;
+}
